@@ -6,12 +6,78 @@ I made this example to show how to implement the Hexagonal Architecture in Node.
 Hexagonal Architecture is an architectural pattern that helps us to create applications that are more independent of the external world.
 It is also known as Ports and Adapters Architecture or Onion Architecture.
 
+## Project Folder Structure
+rc/
+│
+├── adapter/                # Adapters (Ports implementations)
+│   ├── primary/            # Input adapters (driving) e.g. Controllers
+│   │   ├── post/
+│   │   │   └── PostCreateController.ts
+│   │   └── user/
+│   │       ├── AuthUserController.ts
+│   │       └── UserCreateController.ts
+│   │
+│   ├── secondary/          # Output adapters (driven) e.g. DB, Events
+│   │   ├── events/
+│   │   │   ├── BaseEventHandler.ts
+│   │   │   └── PostEventHandler.ts
+│   │   ├── post/
+│   │   │   └── PostRepository.ts
+│   │   └── user/
+│   │       └── UserRepository.ts (example)
+│   │
+│   ├── PostMapper.ts
+│   └── UserMapper.ts
+│
+├── application/            # Application layer (use cases, services)
+│   ├── helpers/
+│   │   ├── jwt_utility.ts
+│   │   └── password_utility.ts
+│   │
+│   ├── Post/
+│   │   ├── domain/
+│   │   │   ├── IPost.ts
+│   │   │   ├── Post.ts
+│   │   │   └── PostEvent.ts
+│   │   ├── port/
+│   │   │   ├── primary/
+│   │   │   └── secondary/
+│   │   └── usecases/
+│   │       ├── CreatePost.ts
+│   │       └── GetPost.ts
+│   │
+│   └── User/
+│       ├── domain/
+│       ├── port/
+│       │   ├── primary/
+│       │   └── secondary/
+│       └── usecases/
+│           ├── CreateUser.ts
+│           └── AuthenticateUser.ts
+│
+├── infrastructure/         # Infrastructure (DB, framework specifics)
+│   └── db/
+│       ├── prisma.schema
+│       └── migrations/
+│
+├── lib/                    # Shared utilities
+│   ├── Event.ts
+│   ├── DIContainer.ts
+│   └── logger.ts
+│
+├── Errors/                 # Domain/application errors
+│
+├── UI/                     # Entry points (e.g. Express, GraphQL, CLI)
+│
+├── tests/                  # Tests (unit, integration)
+│   ├── fakes/
+│   ├── post/
+│   └── user/
+│
+└── index.ts                # App entrypoint
 
-📂 Project Folder Structure
 
-
-
-🧩 Explanation
+## Explanation
 
 adapter/: Implements the ports (both primary = controllers, and secondary = persistence/events).
 
