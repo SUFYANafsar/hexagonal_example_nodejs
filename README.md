@@ -7,6 +7,9 @@ Hexagonal Architecture is an architectural pattern that helps us to create appli
 It is also known as Ports and Adapters Architecture or Onion Architecture.
 
 ## Project Folder Structure
+
+```bash
+
 src/
 │
 ├── adapter/                # Adapters (Ports implementations)
