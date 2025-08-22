@@ -77,6 +77,7 @@ src/
 │
 └── index.ts                # App entrypoint
 
+
 🧩 Explanation
 
 adapter/: Implements the ports (both primary = controllers, and secondary = persistence/events).
